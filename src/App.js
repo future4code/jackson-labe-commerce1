@@ -61,7 +61,8 @@ export default class App extends React.Component {
     buscaValor: '',
     minimoValor: '',
     maximoValor: '',
-    ordemValor: ''
+    ordemValor: '',
+    totalCarrinho: 0
   }
 
   onChangeBusca = (event) => {
@@ -80,13 +81,40 @@ export default class App extends React.Component {
     this.setState({ ordemValor: event.target.value })
   }
 
+  adicionarCarrinho = (id) => {
+    const novoProduto = this.state.produtos.filter(produto => {
+      return produto.id === id
+    })
+
+    const carrinhoExpectativa = [...this.state.carrinho, novoProduto]
+
+    const novoTotal = this.state.totalCarrinho + novoProduto.value 
+
+    this.setState({ 
+      carrinho: carrinhoExpectativa,
+      totalCarrinho: novoTotal
+     })
+  }
+
+  deletarItemCarrinho = (id) => {
+    const carrinhoRealidade = this.state.carrinho.filter(produto => {
+      return produto.id !== id
+    })
+
+    this.setState({ carrinho: carrinhoRealidade })
+  }
+
+  
+  
+
+
 
 
   render () {
   
     return (
       <AppContainer>
-
+        Labelitos
       </AppContainer>
     );
   }
