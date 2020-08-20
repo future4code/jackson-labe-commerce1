@@ -43,6 +43,7 @@ export default class App extends React.Component {
         name: "Foguete da Missão Apollo 11",
         preco: 10000.0,
         image: "https://picsum.photos/200/200",
+        quantidade: 1
       },
       {
         id: 7,
@@ -62,7 +63,8 @@ export default class App extends React.Component {
     minimoValor: '',
     maximoValor: '',
     ordemValor: '',
-    totalCarrinho: 0
+    totalCarrinho: 0,
+    carrinhoAberto: false
   }
 
   onChangeBusca = (event) => {
@@ -79,6 +81,10 @@ export default class App extends React.Component {
 
   onChangeOrdem = (event) => {
     this.setState({ ordemValor: event.target.value })
+  }
+
+  abrirCarrinho = () => {
+    this.setState({carrinhoAberto: !this.state.carrinhoAberto})
   }
 
   adicionarCarrinho = (id) => {
@@ -105,7 +111,23 @@ export default class App extends React.Component {
   }
 
   render () {
-  
+
+    let componenteCarrinho
+    if(this.state.carrinhoAberto) {
+      componenteCarrinho = (
+        this.state.produtos.map(produto => {
+          return (
+            <Carrinho
+              quantidadeProduto={}
+              tituloProduto={produto.name}
+              clickDeletarProduto={() => this.deletarItemCarrinho(produto.id)}
+              iconeDeletar={}
+            />
+          )
+        })
+      )
+    }
+
     return (
       <AppContainer>
         <Cabecalho/>
@@ -133,7 +155,7 @@ export default class App extends React.Component {
               clickAddCarrinho={adicionarCarrinho}
             />
           </CardContainer>
-          <Carrinho/>
+          {componenteCarrinho}
         </MainContainer>
         <Rodape/>
       </AppContainer>
