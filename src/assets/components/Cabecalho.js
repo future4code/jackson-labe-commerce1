@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import {} from './Styled';
+import { Header } from './Styled';
 
 export class Cabecalho extends React.Component{
   render(){
     return (
-      <div>
+      <Header>
         <h1>LabeLitos</h1>
         <h3>Não são pedras! São Labelitos!</h3>
-      </div>
+      </Header>
     )
   }
 }
