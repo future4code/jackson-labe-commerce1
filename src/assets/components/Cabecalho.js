@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Header } from './Styled';
+import {Header} from './Styled';
 
 export class Cabecalho extends React.Component{
   render(){
@@ -9,6 +9,6 @@ export class Cabecalho extends React.Component{
         <h1>LabeLitos</h1>
         <h3>Não são pedras! São Labelitos!</h3>
       </Header>
-    )
-  }
-}
+    );
+  };
+};
