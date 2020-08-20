@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {ImagemCard} from './Styled';
-import {CardProduto} from './Styled'
+import {ImagemCard, CardProduto} from './Styled';
 
 export class Card extends React.Component{
   render(){
@@ -12,6 +11,6 @@ export class Card extends React.Component{
         <h3>R${this.props.precoCard}</h3>
         <button onClick={this.props.clickAddCarrinho}>Adicionar ao carrinho</button>
       </CardProduto>
-    )
-  }
-}
+    );
+  };
+};

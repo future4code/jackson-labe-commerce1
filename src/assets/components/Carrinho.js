@@ -15,6 +15,6 @@ export class Carrinho extends React.Component {
           />
         </li>
       </div>
-    )
-  }
-}
+    );
+  };
+};

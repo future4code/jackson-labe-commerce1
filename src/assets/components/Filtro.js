@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FiltroContainer } from './Styled';
+import {FiltroContainer} from './Styled';
 
 export class Filtro extends React.Component{
   render(){
@@ -25,6 +25,6 @@ export class Filtro extends React.Component{
           onChange={this.props.changeBusca}
         />
       </FiltroContainer>
-    )
-  }
-}
+    );
+  };
+};

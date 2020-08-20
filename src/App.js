@@ -1,9 +1,9 @@
 import React from 'react';
-import {Cabecalho} from './assets/components/Cabecalho'
-import {Card} from './assets/components/Card'
-import {Carrinho} from './assets/components/Carrinho'
-import {Filtro} from './assets/components/Filtro'
-import {Rodape} from './assets/components/Rodape'
+import {Cabecalho} from './assets/components/Cabecalho';
+import {Card} from './assets/components/Card';
+import {Carrinho} from './assets/components/Carrinho';
+import {Filtro} from './assets/components/Filtro';
+import {Rodape} from './assets/components/Rodape';
 import {
   AppContainer, 
   MainContainer, 
@@ -12,18 +12,18 @@ import {
   HeaderCards,
   BotaoCarrinho,
   Chapolin
-} from './assets/components/Styled'
-import bendego from './assets/img/bendego.jpg'
-import condritoBrecha from './assets/img/condrito-brecha.jpg'
-import condrulesAustralian from './assets/img/condrules-australian.jpg'
-import parkForest from './assets/img/park-forest.jpg'
-import sikhoteAlin from './assets/img/sikhote-alin.jpg'
-import varreSai from './assets/img/varre-sai.jpg'
-import viscenio from './assets/img/viscenio.jpg'
-import tatahouine from './assets/img/tatahouine.jpg'
-import botaoCarrinho from './assets/img/shopping-white.svg'
-import iconeDeletar from './assets/img/delete.svg'
-import imgChap from './assets/img/aerolitochapolin.jpeg'
+} from './assets/components/Styled';
+import bendego from './assets/img/bendego.jpg';
+import condritoBrecha from './assets/img/condrito-brecha.jpg';
+import condrulesAustralian from './assets/img/condrules-australian.jpg';
+import parkForest from './assets/img/park-forest.jpg';
+import sikhoteAlin from './assets/img/sikhote-alin.jpg';
+import varreSai from './assets/img/varre-sai.jpg';
+import viscenio from './assets/img/viscenio.jpg';
+import tatahouine from './assets/img/tatahouine.jpg';
+import botaoCarrinho from './assets/img/shopping-white.svg';
+import iconeDeletar from './assets/img/delete.svg';
+import imgChap from './assets/img/aerolitochapolin.jpeg';
 
 export default class App extends React.Component {
   state = {
@@ -32,49 +32,57 @@ export default class App extends React.Component {
         id: 1,
         titulo: "Bendegó",
         preco: 100,
-        imagem: bendego
+        imagem: bendego,
+        quantidade: 1
       },
       {
         id: 2,
         titulo: "Condrito Brecha",
         preco: 150,
-        imagem: condritoBrecha
+        imagem: condritoBrecha,
+        quantidade: 1
       },
       {
         id: 3,
-        titulo: "Côndrules Australian",
+        titulo: "Côndrules",
         preco: 300,
-        imagem: condrulesAustralian
+        imagem: condrulesAustralian,
+        quantidade: 1
       },
       {
         id: 4,
         titulo: "Park Forest",
         preco: 200,
-        imagem: parkForest
+        imagem: parkForest,
+        quantidade: 1
       },
       {
         id: 5,
         titulo: "Sikhote-Alin",
         preco: 400,
-        imagem: sikhoteAlin
+        imagem: sikhoteAlin,
+        quantidade: 1
       },
       {
         id: 6,
         titulo: "Tatahouine",
         preco: 250,
-        imagem: tatahouine
+        imagem: tatahouine,
+        quantidade: 1
       },
       {
         id: 7,
         titulo: "Varre-sai",
         preco: 350,
-        imagem: varreSai
+        imagem: varreSai,
+        quantidade: 1
       },
       {
         id: 8,
         titulo: "Viscenio",
         preco: 280,
-        imagem: viscenio
+        imagem: viscenio,
+        quantidade: 1
       }
     ],
     carrinho: [],
@@ -83,113 +91,130 @@ export default class App extends React.Component {
     maximoValor: '',
     ordemValor: '',
     totalCarrinho: 0,
-    carrinhoAberto: true
-  }
-  
-  // onChanges
+    carrinhoAberto: false
+  };
+
+
   onChangeBusca = (event) => {
     this.setState({ buscaValor: event.target.value })
-  }
+  };
+
+
   onChangeMinimo = (event) => {
     this.setState({ minimoValor: event.target.value })
-  }
+  };
+
+
   onChangeMaximo = (event) => {
     this.setState({ maximoValor: event.target.value })
-  }
+  };
+
+
   onChangeOrdem = (event) => {
-    this.setState({ ordemValor: event.target.value })
-  }
-
-  // Funções
-  abrirCarrinho = () => {
-    this.setState({carrinhoAberto: !this.state.carrinhoAberto})
-    console.log('Carrinho Aberto:', this.state.carrinhoAberto)
-  }
-  
-  // adicionarCarrinho = (id) => {
-  //   const novoProduto = this.state.produtos.filter(produto => {
-  //     return produto.id === id
-  //   })
-  //   const carrinhoExpectativa = [...this.state.carrinho, novoProduto]
-  //   const novoTotal = this.state.totalCarrinho + novoProduto.preco 
-  //   this.setState({ 
-  //     carrinho: carrinhoExpectativa,
-  //     totalCarrinho: novoTotal
-  //   })
-  //   console.log(this.state.carrinho)
-  // }
-
-  adicionarCarrinho = (produto) => {    
-    const carrinhoExpectativa = [...this.state.carrinho]
-    const indiceNovoProduto = this.state.carrinho.findIndex(item => {
-      return item.produto.id === produto.id
-    })
-
-    if (indiceNovoProduto > -1) {
-      carrinhoExpectativa[indiceNovoProduto].quantidade += 1
-    } else {
-      carrinhoExpectativa.push({
-        id: produto.id,
-        titulo: produto.titulo,
-        preco: produto.preco,
-        quantidade: 1
+    let listaOrdenada = [];
+    if (event.target.value === 'crescente') {
+      listaOrdenada = [...this.state.produtos];
+      listaOrdenada.sort ((a, b) => {
+        return a.preco - b.preco;
       })
     }
+    if ( event.target.value === 'decrescente' ) {
+      listaOrdenada = [...this.state.produtos];
+      listaOrdenada.sort ((b, a) => {
+        return a.preco - b.preco;
+      })
+    }
+    this.setState({ produtos: listaOrdenada })
+  };
 
-    this.setState({ carrinho: carrinhoExpectativa })
-    console.log(this.state.carrinho)
-  }
 
-  deletarItemCarrinho = (id) => {
-    const carrinhoRealidade = this.state.carrinho.filter(produto => {
-      return produto.id !== id
+  abrirCarrinho = () => {
+    this.setState({carrinhoAberto: !this.state.carrinhoAberto});
+  };
+
+ 
+  adicionarCarrinho = (id) => {
+    const produtoSelecionado = this.state.produtos.find(produto => {
+      return produto.id === id
     })
-    this.setState({ carrinho: carrinhoRealidade })
-  }
+    const posicaoDoProdutoNoCarrinho = this.state.carrinho.findIndex(produto => {
+      return produto.id === id
+    });
+    const existeNoCarrinho = posicaoDoProdutoNoCarrinho > -1
+    let novoCarrinho = [...this.state.carrinho]
+    if (existeNoCarrinho) {
+      novoCarrinho = novoCarrinho.map(produto => {
+        if (produto.id === id ) {
+          return {
+            ...produto,
+            quantidade: produto.quantidade + 1
+          }
+        }
+        return produto
+      })
+    } else {
+      novoCarrinho.push(produtoSelecionado)
+    }
+    this.setState({carrinho: novoCarrinho})
+    if (!this.state.carrinhoAberto) {
+      this.setState({carrinhoAberto: !this.state.carrinhoAberto})
+    }
+  };
 
-  renderizaCarrinho =  () => {
+
+  deletarItemCarrinho = (event) => {
+    const id = Number(event.target.id)
+    let novoCarrinho = [...this.state.carrinho]
+    novoCarrinho = novoCarrinho.map( produto => {
+      if (produto.quantidade > 1 ) {
+        if (produto.id === id ) {
+          return {
+            ...produto,
+            quantidade: produto.quantidade - 1
+          }
+        }
+        return produto
+      } else {
+        if (produto.id === id ) {
+          return produto.id !== id
+        }
+        return produto
+      }
+    })
+    this.setState({carrinho: novoCarrinho})
+    if (!this.state.carrinhoAberto) {
+      this.setState({ carrinhoAberto: !this.state.carrinhoAberto })
+    }
+  };
+
+
+  renderCarrinho =  () => {
     let resultado = 0;
     this.state.carrinho.forEach(produto => {
       if (produto) {
-        resultado += produto.preco
+        resultado += (produto.preco * produto.quantidade)
       }
     })
     return (
         <div>
           <h2>Carrinho</h2>
           {this.state.carrinho.map(produto => {
-            if (produto.quantidade > 0) {
+            if (produto.quantidade > 0 ) {
               return <Carrinho 
-                tituloProduto={produto.titulo} 
-                // quantidadeProduto={produto.quantidade} 
-                clickDeletarProduto={() => this.deletarItemCarrinho(produto.id)}
-              />
+              tituloProduto={produto.titulo} 
+              quantidadeProduto={produto.quantidade} 
+              clickDeletarProduto={this.deletarProduto}
+              iconeDeletar={iconeDeletar}
+            />
             }
-
           })}
-          <p><strong>R$ {resultado}</strong></p>
+          <p><strong>Total: R$ {resultado}</strong></p>
         </div>
     )
-  }
+  };
+
 
   render () {
-
-    // let componenteCarrinho
-    // if(this.state.carrinhoAberto) {
-    //   componenteCarrinho = (
-    //     this.state.carrinho.map(produto => {
-    //       return (
-    //         <Carrinho
-    //           // quantidadeProduto={}
-    //           tituloProduto={produto.titulo}
-    //           clickDeletarProduto={() => this.deletarItemCarrinho(produto.id)}
-    //           iconeDeletar={ iconeDeletar }
-    //         />
-    //       )
-    //     })
-    //   )
-    // }
-
     return (
       <AppContainer>
         <Cabecalho/>
@@ -208,7 +233,7 @@ export default class App extends React.Component {
           <CardContainer>
             <HeaderCards>
               <p>Quantidade de produtos: 8</p>
-              <select>
+              <select onChange={this.onChangeOrdem}>
                 <option value='crescente'>Preço: crescente</option>
                 <option value='decrescente'>Preço: decrescente</option>
               </select>
@@ -226,11 +251,11 @@ export default class App extends React.Component {
               }) }
             </Cards>
           </CardContainer>
-          {this.state.abrirCarrinho && this.renderizaCarrinho()}
+          {this.state.carrinhoAberto && this.renderCarrinho()}
         </MainContainer>
         <Rodape/>
         <BotaoCarrinho onClick={this.abrirCarrinho}>
-          <img src={ botaoCarrinho } />
+          <img src={botaoCarrinho} />
         </BotaoCarrinho>
       </AppContainer>
     );
