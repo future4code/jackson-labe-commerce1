@@ -10,7 +10,8 @@ import {
   CardContainer,
   Cards, 
   HeaderCards,
-  BotaoCarrinho
+  BotaoCarrinho,
+  Chapolin
 } from './assets/components/Styled'
 import bendego from './assets/img/bendego.jpg'
 import condritoBrecha from './assets/img/condrito-brecha.jpg'
@@ -22,6 +23,7 @@ import viscenio from './assets/img/viscenio.jpg'
 import tatahouine from './assets/img/tatahouine.jpg'
 import botaoCarrinho from './assets/img/shopping-white.svg'
 import iconeDeletar from './assets/img/delete.svg'
+import imgChap from './assets/img/aerolitochapolin.jpeg'
 
 export default class App extends React.Component {
   state = {
@@ -200,6 +202,9 @@ export default class App extends React.Component {
             changeMinimo={this.onChangeMinimo}
             changeMaximo={this.onChangeMaximo}
           />
+          <Chapolin>
+            <img src={ imgChap} />
+          </Chapolin>
           <CardContainer>
             <HeaderCards>
               <p>Quantidade de produtos: 8</p>

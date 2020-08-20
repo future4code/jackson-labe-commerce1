@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import {} from './Styled';
+import { FiltroContainer } from './Styled';
 
 export class Filtro extends React.Component{
   render(){
     return (
-      <div>
-        <h4>Filtros:</h4>
+      <FiltroContainer>
+        <h3>Filtros:</h3>
         <p>Valor Máximo</p>
         <input 
           type='number' 
@@ -24,7 +24,7 @@ export class Filtro extends React.Component{
           value={this.props.valueBusca}
           onChange={this.props.changeBusca}
         />
-      </div>
+      </FiltroContainer>
     )
   }
 }
