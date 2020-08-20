@@ -1,61 +1,68 @@
 import React from 'react';
-import Cabecalho from './assets/components/Cabecalho'
-import Card from './assets/components/Card'
-import Filtro from './assets/components/Filtro'
-import Rodape from './assets/components/Rodape'
-import { AppContainer } from './assets/components/Styled'
+import {Cabecalho} from './assets/components/Cabecalho'
+import {Card} from './assets/components/Card'
+import {Filtro} from './assets/components/Filtro'
+import {Rodape} from './assets/components/Rodape'
+import {AppContainer} from './assets/components/Styled'
+import bendego from './assets/img/bendego.jpg'
+import condritoBrecha from './assets/img/condrito-brecha.jpg'
+import condrulesAustralian from './assets/img/condrules-australian.jpg'
+import parkForest from './assets/img/park-forest.jpg'
+import sikhoteAlin from './assets/img/sikhote-alin.jpg'
+import varreSai from './assets/img/varre-sai.jpg'
+import viscenio from './assets/img/bendego.jpg'
+import tatahouine from './assets/img/tatahouine.jpg'
 
 export default class App extends React.Component {
   state = {
     produtos: [
       {
         id: 1,
-        name: "Foguete da Missão Apollo 11",
-        preco: 10000.0,
-        image: "https://picsum.photos/200/200",
+        name: "Bendegó",
+        preco: 100,
+        image: {bendego}
       },
       {
         id: 2,
-        name: "Foguete da Missão Apollo 11",
-        preco: 10000.0,
-        image: "https://picsum.photos/200/200",
-      },
-      {
-        id: 4,
-        name: "Foguete da Missão Apollo 11",
-        preco: 10000.0,
-        image: "https://picsum.photos/200/200",
+        name: "Condrito Brecha",
+        preco: 150,
+        image: {condritoBrecha}
       },
       {
         id: 3,
-        name: "Foguete da Missão Apollo 11",
-        preco: 10000.0,
-        image: "https://picsum.photos/200/200",
+        name: "Côndrules Australian",
+        preco: 300,
+        image: {condrulesAustralian},
+      },
+      {
+        id: 4,
+        name: "Park Forest",
+        preco: 200,
+        image: {parkForest},
       },
       {
         id: 5,
-        name: "Foguete da Missão Apollo 11",
-        preco: 10000.0,
-        image: "https://picsum.photos/200/200",
+        name: "Sikhote-Alin",
+        preco: 400,
+        image: {sikhoteAlin},
       },
       {
         id: 6,
-        name: "Foguete da Missão Apollo 11",
-        preco: 10000.0,
-        image: "https://picsum.photos/200/200",
-        quantidade: 1
+        name: "Tatahouine",
+        preco: 250,
+        image: {tatahouine},
       },
       {
         id: 7,
-        name: "Foguete da Missão Apollo 11",
-        preco: 10000.0,
-        image: "https://picsum.photos/200/200",
+        name: "Varre-sai",
+        preco: 350,
+        image: {varreSai},
       },
       {
         id: 8,
-        name: "Foguete da Missão Apollo 11",
-        preco: 10000.0,
-        image: "https://picsum.photos/200/200",
+        name: "Viscenio",
+        preco: 280,
+        image: {viscenio},
       }
     ],
     carrinho: [],
@@ -66,36 +73,32 @@ export default class App extends React.Component {
     totalCarrinho: 0,
     carrinhoAberto: false
   }
-
+  
+  // onChanges
   onChangeBusca = (event) => {
     this.setState({ buscaValor: event.target.value })
   }
-
   onChangeMinimo = (event) => {
     this.setState({ minimoValor: event.target.value })
   }
-
   onChangeMaximo = (event) => {
     this.setState({ maximoValor: event.target.value })
   }
-
   onChangeOrdem = (event) => {
     this.setState({ ordemValor: event.target.value })
   }
 
+  // Funções
   abrirCarrinho = () => {
     this.setState({carrinhoAberto: !this.state.carrinhoAberto})
   }
-
+  
   adicionarCarrinho = (id) => {
     const novoProduto = this.state.produtos.filter(produto => {
       return produto.id === id
     })
-
     const carrinhoExpectativa = [...this.state.carrinho, novoProduto]
-
     const novoTotal = this.state.totalCarrinho + novoProduto.value 
-
     this.setState({ 
       carrinho: carrinhoExpectativa,
       totalCarrinho: novoTotal
@@ -106,7 +109,6 @@ export default class App extends React.Component {
     const carrinhoRealidade = this.state.carrinho.filter(produto => {
       return produto.id !== id
     })
-
     this.setState({ carrinho: carrinhoRealidade })
   }
 
@@ -118,10 +120,10 @@ export default class App extends React.Component {
         this.state.produtos.map(produto => {
           return (
             <Carrinho
-              quantidadeProduto={}
+              // quantidadeProduto={}
               tituloProduto={produto.name}
               clickDeletarProduto={() => this.deletarItemCarrinho(produto.id)}
-              iconeDeletar={}
+              // iconeDeletar={}
             />
           )
         })

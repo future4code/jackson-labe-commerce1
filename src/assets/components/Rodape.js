@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-componentes';
 import {} from './Styled';
 
-export class Card extends React.Component{
+export class Rodape extends React.Component{
   render(){
     return (
       <div>
