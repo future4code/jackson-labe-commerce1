@@ -94,6 +94,18 @@ export default class App extends React.Component {
     }
   };
 
+  componentDidUpdate() {
+    const comprasCarrinho = this.state.carrinho
+    localStorage.setItem('carrinho', JSON.stringify(comprasCarrinho))
+  }
+
+  componentDidMount() {
+    const carrinhoString = localStorage.getItem('carrinho')
+    if (carrinhoString) {
+      const carrinhoArray = JSON.parse(carrinhoString)
+      this.setState({ carrinho: carrinhoArray })
+    }
+  }
 
   onChangeBusca = (event) => {
     this.setState({ buscaValor: event.target.value })
@@ -175,11 +187,7 @@ export default class App extends React.Component {
 
   deletarProdutoCarrinho = (id) => {
     const carrinhoRealidade = this.state.carrinho.filter(produto => {
-      if (produto.id === id) {
-        return false
-      } else {
-        return true
-      }
+      return (produto.id === id) ? false : true
     });
     this.setState({carrinho: carrinhoRealidade});
   };

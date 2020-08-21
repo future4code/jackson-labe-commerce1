@@ -1,19 +1,23 @@
 import React from 'react';
-import {ImgDeletar} from './Styled.js';
+import {
+  CarrinhoListaProdutos,
+  ProdutoNoCarrinho,
+  ImgDeletar,
+} from './Styled.js';
 
 export class Carrinho extends React.Component {
   render() {
     return(
-      <div>
-        <li>
+      <CarrinhoListaProdutos>
+        <ProdutoNoCarrinho>
           {this.props.quantidadeProduto}x {this.props.tituloProduto}
           <ImgDeletar 
             onClick={this.props.clickDeletarProduto}  
             src={this.props.iconeDeletar} 
             alt="icone deletar"
           />
-        </li>
-      </div>
+        </ProdutoNoCarrinho>
+      </CarrinhoListaProdutos>
     );
   };
 };

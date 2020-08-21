@@ -24,10 +24,7 @@ export const MainContainer = styled.div`
   gap: 20px;
   background-color: whitesmoke;
 `
-export const ImgDeletar = styled.img`
-  cursor: pointer;
-  padding-left: 5px;
-`
+
 export const FiltroContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -102,6 +99,31 @@ export const BotaoCarrinho = styled.div`
     box-shadow: 0 0 20px coral;
   }
 `
+export const CarrinhoListaProdutos = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+`
+
+export const ProdutoNoCarrinho = styled.li`
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  border-bottom: 1px dashed black;
+  padding: 5px 0;
+`
+
+export const ImgDeletar = styled.img`
+  margin-left: 15px;
+  cursor: pointer;
+  transition: 0.8s;
+  border-radius: 50%;
+  
+  :hover {
+    background-color: red;
+  }
+`
+
 export const Footer = styled.div`
   display: flex;
   flex-direction: column;
