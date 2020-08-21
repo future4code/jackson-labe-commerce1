@@ -113,7 +113,6 @@ export default class App extends React.Component {
     const produtos = this.state.produtos
     const filtros = this.state.filtros
     const buscaValor = this.state.buscaValor
-
     let produtosFiltrados = produtos.filter(produto => {
       return produto.titulo.toLowerCase().indexOf(buscaValor.toLowerCase()) > -1
     }).filter(produto => {
@@ -121,9 +120,8 @@ export default class App extends React.Component {
     }).filter(produto => {
       return produto.preco > (filtros.minimoValor || 0)
     })
-  
   return produtosFiltrados
-  }
+  };
 
 
   onChangeOrdem = (event) => {
@@ -157,9 +155,9 @@ export default class App extends React.Component {
       return produto.id === id
     });
     const existeNoCarrinho = posicaoDoProdutoNoCarrinho > -1
-    let novoCarrinho = [...this.state.carrinho]
+    let carrinhoExpectativa = [...this.state.carrinho]
     if (existeNoCarrinho) {
-      novoCarrinho = novoCarrinho.map(produto => {
+      carrinhoExpectativa = carrinhoExpectativa.map(produto => {
         if (produto.id === id ) {
           return {
             ...produto,
@@ -169,35 +167,21 @@ export default class App extends React.Component {
         return produto
       })
     } else {
-      novoCarrinho.push(produtoSelecionado)
+      carrinhoExpectativa.push(produtoSelecionado)
     }
-    this.setState({carrinho: novoCarrinho})
+    this.setState({carrinho: carrinhoExpectativa})
   };
 
 
-  deletarItemCarrinho = (event) => {
-    const id = Number(event.target.id)
-    let novoCarrinho = [...this.state.carrinho]
-    novoCarrinho = novoCarrinho.map( produto => {
-      if (produto.quantidade > 1 ) {
-        if (produto.id === id ) {
-          return {
-            ...produto,
-            quantidade: produto.quantidade - 1
-          }
-        }
-        return produto
+  deletarProdutoCarrinho = (id) => {
+    const carrinhoRealidade = this.state.carrinho.filter(produto => {
+      if (produto.id === id) {
+        return false
       } else {
-        if (produto.id === id ) {
-          return produto.id !== id
-        }
-        return produto
+        return true
       }
-    })
-    this.setState({carrinho: novoCarrinho})
-    if (!this.state.carrinhoAberto) {
-      this.setState({ carrinhoAberto: !this.state.carrinhoAberto })
-    }
+    });
+    this.setState({carrinho: carrinhoRealidade});
   };
 
 
@@ -207,7 +191,7 @@ export default class App extends React.Component {
       if (produto) {
         resultado += (produto.preco * produto.quantidade)
       }
-    })
+    });
     return (
         <div>
           <h2>Carrinho</h2>
@@ -216,7 +200,7 @@ export default class App extends React.Component {
               return <Carrinho 
               tituloProduto={produto.titulo} 
               quantidadeProduto={produto.quantidade} 
-              clickDeletarProduto={this.deletarProduto}
+              clickDeletarProduto={() => this.deletarProdutoCarrinho(produto.id)}
               iconeDeletar={iconeDeletar}
             />
             }
@@ -267,5 +251,5 @@ export default class App extends React.Component {
         </BotaoCarrinho>
       </AppContainer>
     );
-  }
-}
+  };
+};
