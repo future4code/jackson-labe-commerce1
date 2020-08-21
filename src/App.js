@@ -94,6 +94,18 @@ export default class App extends React.Component {
     }
   };
 
+  componentDidUpdate() {
+    const comprasCarrinho = this.state.carrinho
+    localStorage.setItem('carrinho', JSON.stringify(comprasCarrinho))
+  }
+
+  componentDidMount() {
+    const carrinhoString = localStorage.getItem('carrinho')
+    if (carrinhoString) {
+      const carrinhoArray = JSON.parse(carrinhoString)
+      this.setState({ carrinho: carrinhoArray })
+    }
+  }
 
   onChangeBusca = (event) => {
     this.setState({ buscaValor: event.target.value })
@@ -175,29 +187,11 @@ export default class App extends React.Component {
   };
 
 
-  deletarItemCarrinho = (event) => {
-    const id = Number(event.target.id)
-    let novoCarrinho = [...this.state.carrinho]
-    novoCarrinho = novoCarrinho.map( produto => {
-      if (produto.quantidade > 1 ) {
-        if (produto.id === id ) {
-          return {
-            ...produto,
-            quantidade: produto.quantidade - 1
-          }
-        }
-        return produto
-      } else {
-        if (produto.id === id ) {
-          return produto.id !== id
-        }
-        return produto
-      }
-    })
-    this.setState({carrinho: novoCarrinho})
-    if (!this.state.carrinhoAberto) {
-      this.setState({ carrinhoAberto: !this.state.carrinhoAberto })
-    }
+  deletarProdutoCarrinho = (id) => {
+    const carrinhoRealidade = this.state.carrinho.filter(produto => {
+      return (produto.id === id) ? false : true
+    });
+    this.setState({carrinho: carrinhoRealidade});
   };
 
 
@@ -216,7 +210,7 @@ export default class App extends React.Component {
               return <Carrinho 
               tituloProduto={produto.titulo} 
               quantidadeProduto={produto.quantidade} 
-              clickDeletarProduto={this.deletarProduto}
+              clickDeletarProduto={() => this.deletarProdutoCarrinho(produto.id)}
               iconeDeletar={iconeDeletar}
             />
             }
