@@ -1,6 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
-import {FiltroContainer} from './Styled';
+import {
+  FiltroContainer,
+  Chapolin
+} from './Styled';
+import imgChap from '../img/aerolitochapolin.jpeg';
 
 export class Filtro extends React.Component{
   render(){
@@ -24,6 +27,7 @@ export class Filtro extends React.Component{
           value={this.props.valueBusca}
           onChange={this.props.changeBusca}
         />
+        <Chapolin src={ imgChap } />
       </FiltroContainer>
     );
   };

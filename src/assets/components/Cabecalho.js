@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import {Header} from './Styled';
 
 export class Cabecalho extends React.Component{

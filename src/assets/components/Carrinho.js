@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import {} from './Styled.js';
 
 export class Carrinho extends React.Component {
@@ -7,7 +6,7 @@ export class Carrinho extends React.Component {
     return(
       <div>
         <li>
-          {this.props.quantidadeProduto} x {this.props.tituloProduto}
+          {this.props.quantidadeProduto}x {this.props.tituloProduto}
           <img 
             onClick={this.props.clickDeletarProduto}  
             src={this.props.iconeDeletar} 
