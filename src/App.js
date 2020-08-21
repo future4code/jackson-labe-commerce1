@@ -125,7 +125,6 @@ export default class App extends React.Component {
     const produtos = this.state.produtos
     const filtros = this.state.filtros
     const buscaValor = this.state.buscaValor
-
     let produtosFiltrados = produtos.filter(produto => {
       return produto.titulo.toLowerCase().indexOf(buscaValor.toLowerCase()) > -1
     }).filter(produto => {
@@ -133,9 +132,8 @@ export default class App extends React.Component {
     }).filter(produto => {
       return produto.preco > (filtros.minimoValor || 0)
     })
-  
   return produtosFiltrados
-  }
+  };
 
 
   onChangeOrdem = (event) => {
@@ -169,9 +167,9 @@ export default class App extends React.Component {
       return produto.id === id
     });
     const existeNoCarrinho = posicaoDoProdutoNoCarrinho > -1
-    let novoCarrinho = [...this.state.carrinho]
+    let carrinhoExpectativa = [...this.state.carrinho]
     if (existeNoCarrinho) {
-      novoCarrinho = novoCarrinho.map(produto => {
+      carrinhoExpectativa = carrinhoExpectativa.map(produto => {
         if (produto.id === id ) {
           return {
             ...produto,
@@ -181,9 +179,9 @@ export default class App extends React.Component {
         return produto
       })
     } else {
-      novoCarrinho.push(produtoSelecionado)
+      carrinhoExpectativa.push(produtoSelecionado)
     }
-    this.setState({carrinho: novoCarrinho})
+    this.setState({carrinho: carrinhoExpectativa})
   };
 
 
@@ -201,7 +199,7 @@ export default class App extends React.Component {
       if (produto) {
         resultado += (produto.preco * produto.quantidade)
       }
-    })
+    });
     return (
         <div>
           <h2>Carrinho</h2>
@@ -261,5 +259,5 @@ export default class App extends React.Component {
         </BotaoCarrinho>
       </AppContainer>
     );
-  }
-}
+  };
+};

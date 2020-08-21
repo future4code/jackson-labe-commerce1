@@ -2,7 +2,7 @@ import React from 'react';
 import {
   CarrinhoListaProdutos,
   ProdutoNoCarrinho,
-  RemoverProduto
+  ImgDeletar,
 } from './Styled.js';
 
 export class Carrinho extends React.Component {
@@ -11,7 +11,7 @@ export class Carrinho extends React.Component {
       <CarrinhoListaProdutos>
         <ProdutoNoCarrinho>
           {this.props.quantidadeProduto}x {this.props.tituloProduto}
-          <RemoverProduto 
+          <ImgDeletar 
             onClick={this.props.clickDeletarProduto}  
             src={this.props.iconeDeletar} 
             alt="icone deletar"

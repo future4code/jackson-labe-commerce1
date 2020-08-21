@@ -24,6 +24,7 @@ export const MainContainer = styled.div`
   gap: 20px;
   background-color: whitesmoke;
 `
+
 export const FiltroContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -70,6 +71,7 @@ export const CardProduto = styled.div`
     border: unset;
     padding: 10px;
     border-radius: 5px;
+    margin-bottom: 17px;
     transition: 0.5s;
     :hover {
       background: coral;
@@ -111,7 +113,7 @@ export const ProdutoNoCarrinho = styled.li`
   padding: 5px 0;
 `
 
-export const RemoverProduto = styled.img`
+export const ImgDeletar = styled.img`
   margin-left: 15px;
   cursor: pointer;
   transition: 0.8s;
