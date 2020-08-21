@@ -14,6 +14,18 @@ export const Header = styled.div`
     font-family:'Lobster', cursive;
     font-size: 50px;
     color: coral;
+    @media (max-width: 415px){
+    margin: 3px 0 0 0;
+    }
+  }
+  > h3 {
+    @media (max-width: 415px){
+    margin: 5px 0 10px 0;
+    font-size: 18px;
+    }
+  }
+  @media (max-width: 415px){
+    flex-direction: column;
   }
 `
 export const MainContainer = styled.div`
@@ -22,6 +34,10 @@ export const MainContainer = styled.div`
   padding: 10px;
   gap: 20px;
   background-color: whitesmoke;
+  @media (max-width: 415px){
+    display: flex;
+    flex-direction: column;
+  }
 `
 
 export const FiltroContainer = styled.div`
@@ -47,14 +63,27 @@ export const Chapolin = styled.img`
   border-radius: 7px;
   
 `
-export const CardContainer = styled.div`
+export const CarrinhoContainer = styled.div`
+  @media (max-width: 415px){
+    width: 90vw;
+    height: 90vh;
+    bottom: 5vh;
+    margin: auto;
+    position: fixed;
+    background: white;
+    box-shadow: 0 0 3px gray;
+    padding: 10px;
+    border-radius: 15px;
+  }
 `
 export const Cards = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
   background-color: whitesmoke;
   font-size: 12px;
+  @media (max-width: 415px){
+    grid-template-columns: repeat(2, 1fr);
+  }
 `
 export const HeaderCards = styled.div`
   display: flex;
@@ -67,6 +96,11 @@ export const HeaderCards = styled.div`
     outline: none;
     border-radius: 8px;
     font-size: 16px;
+  }
+  @media (max-width: 415px){
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
   }
 `
 export const CardProduto = styled.div`
@@ -111,6 +145,10 @@ export const BotaoCarrinho = styled.div`
  transition: 0.5s;
   :hover {
     box-shadow: 0 0 20px coral;
+  }
+  @media (max-width: 415px){
+    z-index: 10;
+    bottom: 70px;
   }
 `
 export const CarrinhoListaProdutos = styled.ul`
