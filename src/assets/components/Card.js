@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import {ImagemCard, CardProduto} from './Styled';
 
 export class Card extends React.Component{

@@ -19,7 +19,7 @@ export const Header = styled.div`
 `
 export const MainContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-columns: ${(props) => props.carrinhoAberto ? '1fr 3fr 1fr' : '1fr 3fr'};
   padding: 10px;
   gap: 20px;
   background-color: whitesmoke;
@@ -36,13 +36,10 @@ export const FiltroContainer = styled.div`
     padding: 10px;
   }
 `
-export const Chapolin = styled.div`
-  position: absolute;
-  bottom: 50px;
-  left: 20px;
-  > img {
-    border-radius: 7px;
-  }
+export const Chapolin = styled.img`
+  margin-top: 40px;  
+  border-radius: 7px;
+  
 `
 export const CardContainer = styled.div`
 `

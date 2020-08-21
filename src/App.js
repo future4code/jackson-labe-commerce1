@@ -10,8 +10,7 @@ import {
   CardContainer,
   Cards, 
   HeaderCards,
-  BotaoCarrinho,
-  Chapolin
+  BotaoCarrinho
 } from './assets/components/Styled';
 import bendego from './assets/img/bendego.jpg';
 import condritoBrecha from './assets/img/condrito-brecha.jpg';
@@ -23,7 +22,6 @@ import viscenio from './assets/img/viscenio.jpg';
 import tatahouine from './assets/img/tatahouine.jpg';
 import botaoCarrinho from './assets/img/shopping-white.svg';
 import iconeDeletar from './assets/img/delete.svg';
-import imgChap from './assets/img/aerolitochapolin.jpeg';
 
 export default class App extends React.Component {
   state = {
@@ -87,11 +85,13 @@ export default class App extends React.Component {
     ],
     carrinho: [],
     buscaValor: '',
-    minimoValor: '',
-    maximoValor: '',
     ordemValor: '',
     totalCarrinho: 0,
-    carrinhoAberto: false
+    carrinhoAberto: false,
+    filtros: {
+      minimoValor: null,
+      maximoValor: null
+    }
   };
 
 
@@ -100,14 +100,30 @@ export default class App extends React.Component {
   };
 
 
-  onChangeMinimo = (event) => {
-    this.setState({ minimoValor: event.target.value })
-  };
+  atualizarFiltro = (novoValorFiltro) => {
+    this.setState ({
+      filtros: {
+        ...this.state.filtros,
+        ...novoValorFiltro
+      }
+    })
+  }
 
+  filtrarProdutos() {
+    const produtos = this.state.produtos
+    const filtros = this.state.filtros
+    const buscaValor = this.state.buscaValor
 
-  onChangeMaximo = (event) => {
-    this.setState({ maximoValor: event.target.value })
-  };
+    let produtosFiltrados = produtos.filter(produto => {
+      return produto.titulo.toLowerCase().indexOf(buscaValor.toLowerCase()) > -1
+    }).filter(produto => {
+      return produto.preco < (filtros.maximoValor || Infinity)
+    }).filter(produto => {
+      return produto.preco > (filtros.minimoValor || 0)
+    })
+  
+  return produtosFiltrados
+  }
 
 
   onChangeOrdem = (event) => {
@@ -156,9 +172,6 @@ export default class App extends React.Component {
       novoCarrinho.push(produtoSelecionado)
     }
     this.setState({carrinho: novoCarrinho})
-    if (!this.state.carrinhoAberto) {
-      this.setState({carrinhoAberto: !this.state.carrinhoAberto})
-    }
   };
 
 
@@ -213,33 +226,28 @@ export default class App extends React.Component {
     )
   };
 
-
   render () {
+    const produtosFiltrados = this.filtrarProdutos()
+
     return (
       <AppContainer>
         <Cabecalho/>
         <MainContainer carrinhoAberto={ this.state.carrinhoAberto }>
           <Filtro
-            valueMinimo={this.state.minimoValor}
-            valueMaximo={this.state.maximoValor}
-            valueBusca={this.state.buscaValor}
-            changeBusca={this.onChangeBusca}
-            changeMinimo={this.onChangeMinimo}
-            changeMaximo={this.onChangeMaximo}
+            onChangeFiltro={ this.atualizarFiltro }
+            valorBusca={ this.state.buscaValor }
+            mudarBusca={ this.onChangeBusca }
           />
-          <Chapolin>
-            <img src={ imgChap} />
-          </Chapolin>
           <CardContainer>
             <HeaderCards>
-              <p>Quantidade de produtos: 8</p>
+              <p>Quantidade de produtos: { produtosFiltrados.length } </p>
               <select onChange={this.onChangeOrdem}>
                 <option value='crescente'>Preço: crescente</option>
                 <option value='decrescente'>Preço: decrescente</option>
               </select>
             </HeaderCards>
             <Cards>
-              { this.state.produtos.map(produto => {
+              { produtosFiltrados.map(produto => {
                 return (
                   <Card
                     srcImg={produto.imagem}
@@ -255,7 +263,7 @@ export default class App extends React.Component {
         </MainContainer>
         <Rodape/>
         <BotaoCarrinho onClick={this.abrirCarrinho}>
-          <img src={botaoCarrinho} />
+          <img alt='Icone carrinho' src={botaoCarrinho} />
         </BotaoCarrinho>
       </AppContainer>
     );
