@@ -7,7 +7,7 @@ export class Card extends React.Component{
       <CardProduto>
         <ImagemCard src={this.props.srcImg}/>
         <h2>{this.props.tituloCard}</h2>
-        <h3>R${this.props.precoCard}</h3>
+        <h3>R$ {this.props.precoCard},00</h3>
         <button onClick={this.props.clickAddCarrinho}>Adicionar ao carrinho</button>
       </CardProduto>
     );

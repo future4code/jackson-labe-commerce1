@@ -23,94 +23,90 @@ import tatahouine from './assets/img/tatahouine.jpg';
 import botaoCarrinho from './assets/img/shopping-white.svg';
 import iconeDeletar from './assets/img/delete.svg';
 
+const produtos = [
+  {
+    id: 1,
+    titulo: "Bendegó",
+    preco: 100,
+    imagem: bendego,
+    quantidade: 1
+  },
+  {
+    id: 2,
+    titulo: "Condrito Brecha",
+    preco: 150,
+    imagem: condritoBrecha,
+    quantidade: 1
+  },
+  {
+    id: 3,
+    titulo: "Côndrules",
+    preco: 300,
+    imagem: condrulesAustralian,
+    quantidade: 1
+  },
+  {
+    id: 4,
+    titulo: "Park Forest",
+    preco: 200,
+    imagem: parkForest,
+    quantidade: 1
+  },
+  {
+    id: 5,
+    titulo: "Sikhote-Alin",
+    preco: 400,
+    imagem: sikhoteAlin,
+    quantidade: 1
+  },
+  {
+    id: 6,
+    titulo: "Tatahouine",
+    preco: 250,
+    imagem: tatahouine,
+    quantidade: 1
+  },
+  {
+    id: 7,
+    titulo: "Varre-sai",
+    preco: 350,
+    imagem: varreSai,
+    quantidade: 1
+  },
+  {
+    id: 8,
+    titulo: "Viscenio",
+    preco: 280,
+    imagem: viscenio,
+    quantidade: 1
+  }
+]
+
 export default class App extends React.Component {
   state = {
-    produtos: [
-      {
-        id: 1,
-        titulo: "Bendegó",
-        preco: 100,
-        imagem: bendego,
-        quantidade: 1
-      },
-      {
-        id: 2,
-        titulo: "Condrito Brecha",
-        preco: 150,
-        imagem: condritoBrecha,
-        quantidade: 1
-      },
-      {
-        id: 3,
-        titulo: "Côndrules",
-        preco: 300,
-        imagem: condrulesAustralian,
-        quantidade: 1
-      },
-      {
-        id: 4,
-        titulo: "Park Forest",
-        preco: 200,
-        imagem: parkForest,
-        quantidade: 1
-      },
-      {
-        id: 5,
-        titulo: "Sikhote-Alin",
-        preco: 400,
-        imagem: sikhoteAlin,
-        quantidade: 1
-      },
-      {
-        id: 6,
-        titulo: "Tatahouine",
-        preco: 250,
-        imagem: tatahouine,
-        quantidade: 1
-      },
-      {
-        id: 7,
-        titulo: "Varre-sai",
-        preco: 350,
-        imagem: varreSai,
-        quantidade: 1
-      },
-      {
-        id: 8,
-        titulo: "Viscenio",
-        preco: 280,
-        imagem: viscenio,
-        quantidade: 1
-      }
-    ],
+    produtos,
     carrinho: [],
     buscaValor: '',
     ordemValor: '',
     totalCarrinho: 0,
     carrinhoAberto: false,
     filtros: {
-      minimoValor: null,
-      maximoValor: null
+      minimoValor: 0,
+      maximoValor: 0
     }
   };
 
   componentDidUpdate() {
-    const comprasCarrinho = this.state.carrinho
-    localStorage.setItem('carrinho', JSON.stringify(comprasCarrinho))
+    localStorage.setItem('carrinho', JSON.stringify(this.state.carrinho))
   }
 
   componentDidMount() {
-    const carrinhoString = localStorage.getItem('carrinho')
-    if (carrinhoString) {
-      const carrinhoArray = JSON.parse(carrinhoString)
-      this.setState({ carrinho: carrinhoArray })
-    }
+    this.setState({carrinho: JSON.parse(localStorage.getItem('carrinho'))})
   }
 
   onChangeBusca = (event) => {
     this.setState({ buscaValor: event.target.value })
   };
-
 
   atualizarFiltro = (novoValorFiltro) => {
     this.setState ({
@@ -122,9 +118,7 @@ export default class App extends React.Component {
   }
 
   filtrarProdutos() {
-    const produtos = this.state.produtos
-    const filtros = this.state.filtros
-    const buscaValor = this.state.buscaValor
+    const {produtos, filtros, buscaValor} = this.state
     let produtosFiltrados = produtos.filter(produto => {
       return produto.titulo.toLowerCase().indexOf(buscaValor.toLowerCase()) > -1
     }).filter(produto => {
@@ -134,7 +128,6 @@ export default class App extends React.Component {
     })
   return produtosFiltrados
   };
-
 
   onChangeOrdem = (event) => {
     let listaOrdenada = [];
@@ -153,12 +146,10 @@ export default class App extends React.Component {
     this.setState({ produtos: listaOrdenada })
   };
 
-
   abrirCarrinho = () => {
     this.setState({carrinhoAberto: !this.state.carrinhoAberto});
   };
 
- 
   adicionarCarrinho = (id) => {
     const produtoSelecionado = this.state.produtos.find(produto => {
       return produto.id === id
@@ -184,14 +175,12 @@ export default class App extends React.Component {
     this.setState({carrinho: carrinhoExpectativa})
   };
 
-
   deletarProdutoCarrinho = (id) => {
     const carrinhoRealidade = this.state.carrinho.filter(produto => {
       return (produto.id === id) ? false : true
     });
     this.setState({carrinho: carrinhoRealidade});
   };
-
 
   renderCarrinho =  () => {
     let resultado = 0;
@@ -213,7 +202,7 @@ export default class App extends React.Component {
             />
             }
           })}
-          <p><strong>Total: R$ {resultado}</strong></p>
+          <p><strong>Total: R$ {resultado},00</strong></p>
         </div>
     )
   };

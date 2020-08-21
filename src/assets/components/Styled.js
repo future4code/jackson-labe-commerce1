@@ -8,7 +8,6 @@ export const Header = styled.div`
   justify-content: space-around;
   align-items: center;
   background-color: black;
-  font-family: Cambria, serif;
   font-size: 22px;
   color: whitesmoke;
   > h1 {
@@ -29,12 +28,18 @@ export const FiltroContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: Cambria, serif;
+  background-color: lightgray;
+  padding: 20px;
+  border-radius: 10px;
   > input {
     border: none;
     border-radius: 5px;
     outline: none;
     padding: 10px;
+    box-shadow: 2px 2px 4px gray;
+    :focus {
+      box-shadow: 2px 2px 4px coral;
+    } 
   }
 `
 export const Chapolin = styled.img`
@@ -50,21 +55,28 @@ export const Cards = styled.div`
   grid-template-rows: 1fr 1fr;
   background-color: whitesmoke;
   font-size: 12px;
-  font-family: Cambria, serif;
 `
 export const HeaderCards = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  font-family: Cambria, serif;
   font-size: 18px;
+
+  > select {
+    padding: 8px;
+    outline: none;
+    border-radius: 8px;
+    font-size: 16px;
+  }
 `
 export const CardProduto = styled.div`
-  border: 1px dashed coral;
+  border: none;
+  border-radius: 15px;
   padding: 5px;
   margin: 5px;
   text-align: center;
   background-color: white;
+  box-shadow: 2px 2px 4px gray;
   > button {
     background-color: black;
     color: white;
@@ -73,6 +85,7 @@ export const CardProduto = styled.div`
     border-radius: 5px;
     margin-bottom: 17px;
     transition: 0.5s;
+    outline: none;
     :hover {
       background: coral;
     }
@@ -81,6 +94,7 @@ export const CardProduto = styled.div`
 `
 export const ImagemCard = styled.img`
   width: 100%;
+  border-radius: 15px;
 `
 export const BotaoCarrinho = styled.div`
  display: flex;
@@ -130,7 +144,6 @@ export const Footer = styled.div`
   justify-content: center;
   align-items: center;
   background-color: black;
-  font-family: Cambria, serif;
   font-weight: bold;
   color: whitesmoke;
 `
