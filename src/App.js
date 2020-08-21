@@ -6,11 +6,11 @@ import {Filtro} from './assets/components/Filtro';
 import {Rodape} from './assets/components/Rodape';
 import {
   AppContainer, 
-  MainContainer, 
-  CardContainer,
+  MainContainer,
   Cards, 
   HeaderCards,
-  BotaoCarrinho
+  BotaoCarrinho,
+  CarrinhoContainer
 } from './assets/components/Styled';
 import bendego from './assets/img/bendego.jpg';
 import condritoBrecha from './assets/img/condrito-brecha.jpg';
@@ -101,7 +101,7 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({carrinho: JSON.parse(localStorage.getItem('carrinho'))})
+    this.setState({carrinho: JSON.parse(localStorage.getItem('carrinho')) || []})
   }
 
   onChangeBusca = (event) => {
@@ -190,7 +190,7 @@ export default class App extends React.Component {
       }
     });
     return (
-        <div>
+        <CarrinhoContainer>
           <h2>Carrinho</h2>
           {this.state.carrinho.map(produto => {
             if (produto.quantidade > 0 ) {
@@ -203,7 +203,7 @@ export default class App extends React.Component {
             }
           })}
           <p><strong>Total: R$ {resultado},00</strong></p>
-        </div>
+        </CarrinhoContainer>
     )
   };
 
@@ -219,7 +219,7 @@ export default class App extends React.Component {
             valorBusca={ this.state.buscaValor }
             mudarBusca={ this.onChangeBusca }
           />
-          <CardContainer>
+          <div>
             <HeaderCards>
               <p>Quantidade de produtos: { produtosFiltrados.length } </p>
               <select onChange={this.onChangeOrdem}>
@@ -239,7 +239,7 @@ export default class App extends React.Component {
                 )
               }) }
             </Cards>
-          </CardContainer>
+          </div>
           {this.state.carrinhoAberto && this.renderCarrinho()}
         </MainContainer>
         <Rodape/>
